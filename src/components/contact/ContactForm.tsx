@@ -227,6 +227,26 @@ export default function ContactForm() {
         </div>
       )}
 
+      {/* Submission Error Banner */}
+      {errors.general && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="mb-8 p-5 sm:p-6 rounded-2xl bg-red-50 border border-red-200 text-red-950 space-y-2 animate-in fade-in duration-300"
+        >
+          <div className="flex items-center gap-2 font-bold text-sm sm:text-base text-red-950">
+            <AlertCircle className="w-5 h-5 text-brand-red flex-shrink-0" />
+            <span>Submission Error</span>
+          </div>
+          <p className="text-xs sm:text-sm text-red-900 leading-relaxed">
+            {errors.general}
+          </p>
+          <p className="text-[11px] sm:text-xs text-red-800 font-medium pt-1 border-t border-red-200">
+            Your form inputs have been preserved. Please review and try submitting again.
+          </p>
+        </div>
+      )}
+
       {/* The Interactive Form */}
       <form onSubmit={handleSubmit} noValidate className="space-y-4 sm:space-y-5">
         {/* Anti-Spam Honeypot (Hidden) */}

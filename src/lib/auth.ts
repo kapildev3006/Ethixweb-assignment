@@ -1,10 +1,22 @@
 import jwt from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
-const JWT_SECRET =
-  process.env.JWT_SECRET || 'super-secure-ethixweb-jwt-token-secret-change-in-production-2026';
-
 export const ADMIN_COOKIE_NAME = 'ethix_admin_token';
+
+/**
+ * Resolve the administrative JWT signing secret.
+ * Consistent environment variable: AUTH_SECRET (with fallback to JWT_SECRET for runtime compatibility).
+ * Fails securely without any hardcoded secret fallback.
+ */
+function getAuthSecret(): string {
+  const secret = process.env.AUTH_SECRET || process.env.JWT_SECRET;
+  if (!secret || secret.trim().length === 0) {
+    throw new Error(
+      'CRITICAL AUTHENTICATION SECURITY ERROR: AUTH_SECRET environment variable is not defined.'
+    );
+  }
+  return secret.trim();
+}
 
 export interface AdminJwtPayload {
   email: string;
@@ -24,7 +36,8 @@ export function signAdminToken(payload: {
   role: string;
   avatarText?: string;
 }): string {
-  return jwt.sign(payload, JWT_SECRET, {
+  const secret = getAuthSecret();
+  return jwt.sign(payload, secret, {
     expiresIn: '7d',
   });
 }
@@ -34,7 +47,14 @@ export function signAdminToken(payload: {
  */
 export function verifyAdminToken(token: string): AdminJwtPayload | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as AdminJwtPayload;
+    const secret = process.env.AUTH_SECRET || process.env.JWT_SECRET;
+    if (!secret || secret.trim().length === 0) {
+      console.error(
+        'CRITICAL AUTHENTICATION SECURITY ERROR: AUTH_SECRET environment variable is missing. Token rejected.'
+      );
+      return null;
+    }
+    const decoded = jwt.verify(token, secret.trim()) as AdminJwtPayload;
     return decoded;
   } catch (err) {
     return null;

@@ -83,16 +83,13 @@ export async function POST(request: NextRequest) {
         { status: 201 }
       );
     } catch (dbError: any) {
-      console.warn('MongoDB connection unavailable for enquiry persistence:', dbError.message);
-      // Graceful local development fallback if MongoDB daemon is not running locally
+      console.error('Database persistence failure in /api/enquiry:', dbError);
       return NextResponse.json(
         {
-          success: true,
-          message: 'Enquiry received in development queue.',
-          leadId: `LEAD-PREVIEW-${Date.now()}`,
-          isDevelopmentFallback: true,
+          success: false,
+          error: 'Database connection failed. Unable to save your enquiry at this time.',
         },
-        { status: 201 }
+        { status: 500 }
       );
     }
   } catch (err: any) {

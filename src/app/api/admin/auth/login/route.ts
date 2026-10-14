@@ -64,12 +64,11 @@ export async function POST(request: NextRequest) {
     // 6. Generate signed JWT token
     const token = signAdminToken(adminUser);
 
-    // 7. Return response with secure httpOnly session cookie
+    // 7. Return response with secure httpOnly session cookie (token is delivered strictly via HttpOnly cookie)
     const response = NextResponse.json({
       success: true,
       message: 'Authentication successful.',
       user: adminUser,
-      token,
     });
 
     response.cookies.set({
