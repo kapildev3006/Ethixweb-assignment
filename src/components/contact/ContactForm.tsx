@@ -177,7 +177,7 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 border border-gray-200/90 shadow-xl min-w-0" id="enquiry-form">
+    <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 border border-gray-200/90 shadow-xl min-w-0" id="contact-form">
       {/* Form Header */}
       <div className="mb-6 sm:mb-8 space-y-2">
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-50 text-xs font-semibold text-brand-red border border-red-100">

@@ -7,7 +7,12 @@ interface ServicesCtaProps {
 }
 
 export default function ServicesCta({ whatsappNumber }: ServicesCtaProps) {
-  const activeWhatsapp = (whatsappNumber || '919876543210').replace(/[^0-9]/g, '');
+  const isRealWhatsapp = Boolean(
+    whatsappNumber &&
+    !whatsappNumber.includes('9876543210') &&
+    whatsappNumber.replace(/[^0-9]/g, '').length >= 10
+  );
+  const activeWhatsapp = isRealWhatsapp ? (whatsappNumber || '').replace(/[^0-9]/g, '') : '';
 
   return (
     <section className="py-14 sm:py-18 lg:py-20 bg-white">
@@ -41,17 +46,26 @@ export default function ServicesCta({ whatsappNumber }: ServicesCtaProps) {
                 <span>Discuss Your Project</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
-              <a
-                href={`https://wa.me/${activeWhatsapp}?text=${encodeURIComponent(
-                  'Hi Ethixweb team, I would like to schedule a consultation regarding your digital services for my business.'
-                )}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm sm:text-base font-semibold backdrop-blur-xs transition-colors"
-              >
-                <PhoneCall className="w-4 h-4 text-emerald-300" />
-                <span>Chat on WhatsApp</span>
-              </a>
+              {isRealWhatsapp ? (
+                <a
+                  href={`https://wa.me/${activeWhatsapp}?text=${encodeURIComponent(
+                    'Hi Ethixweb team, I would like to schedule a consultation regarding your digital services for my business.'
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm sm:text-base font-semibold backdrop-blur-xs transition-colors"
+                >
+                  <PhoneCall className="w-4 h-4 text-emerald-300" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              ) : (
+                <Link
+                  href="/about"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm sm:text-base font-semibold backdrop-blur-xs transition-colors"
+                >
+                  <span>Learn About Ethixweb</span>
+                </Link>
+              )}
             </div>
           </div>
         </div>

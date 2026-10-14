@@ -27,7 +27,7 @@ const faqs = [
   {
     question: 'How do we begin a project with Ethixweb?',
     answer:
-      'Start by submitting the enquiry form above or booking a 30-minute discovery call via Calendly. Our technical team will review your project requirements, outline recommended architectures, and propose a prioritized milestone timeline for your approval.',
+      'Start by submitting the enquiry form above. Our technical team will review your project requirements, outline recommended architectures, and propose a prioritized milestone timeline for your approval.',
   },
   {
     question: 'What core technologies and frameworks do you build with?',

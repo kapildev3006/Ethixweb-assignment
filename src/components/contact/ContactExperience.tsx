@@ -13,13 +13,18 @@ interface ContactExperienceProps {
 }
 
 export default function ContactExperience({
-  whatsappNumber = '919876543210',
+  whatsappNumber,
   contactEmail = 'info@ethixweb.com',
   salesPhone = '+1 (888) 555-ETHIX / +91 (80) 4123-ETHX',
   operatingHours = 'Monday – Friday · 9:00 AM – 7:00 PM IST',
-  calendlyUrl = 'https://calendly.com/ethixweb-agency/30min',
+  calendlyUrl = '#contact-form',
 }: ContactExperienceProps) {
-  const activeWhatsapp = (whatsappNumber || '919876543210').replace(/[^0-9]/g, '');
+  const isRealWhatsapp = Boolean(
+    whatsappNumber &&
+    !whatsappNumber.includes('9876543210') &&
+    whatsappNumber.replace(/[^0-9]/g, '').length >= 10
+  );
+  const activeWhatsapp = isRealWhatsapp ? (whatsappNumber || '').replace(/[^0-9]/g, '') : '';
 
   return (
     <section className="py-14 sm:py-18 lg:py-22 bg-gray-50/70 border-b border-gray-100" id="contact-details">
@@ -42,44 +47,46 @@ export default function ContactExperience({
 
             {/* Verified Information Cards */}
             <div className="space-y-4">
-              {/* Direct WhatsApp Consultation (Sourced from MongoDB) */}
-              <div className="p-5 rounded-2xl bg-white border border-emerald-200/90 shadow-subtle flex items-start gap-4 transition-all hover:border-emerald-300 hover:shadow-card">
-                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
-                  <PhoneCall className="w-5 h-5" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 block">
-                      Direct WhatsApp Routing
-                    </span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      Active Chat
-                    </span>
+              {/* Direct WhatsApp Consultation (Rendered only when a verified genuine number is configured) */}
+              {isRealWhatsapp && (
+                <div className="p-5 rounded-2xl bg-white border border-emerald-200/90 shadow-subtle flex items-start gap-4 transition-all hover:border-emerald-300 hover:shadow-card">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100 flex-shrink-0">
+                    <PhoneCall className="w-5 h-5" />
                   </div>
-                  <a
-                    href={`https://wa.me/${activeWhatsapp}?text=${encodeURIComponent('Hello Ethixweb technical team, I would like to inquire about an engineering consultation.')}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base font-bold text-gray-900 hover:text-emerald-600 transition-colors block truncate mt-0.5 font-mono"
-                  >
-                    +{activeWhatsapp}
-                  </a>
-                  <div className="mt-1 flex items-center justify-between gap-2">
-                    <p className="text-xs text-gray-500">
-                      Direct consultation with the technical team.
-                    </p>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700 block">
+                        Direct WhatsApp Routing
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-full">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        Active Chat
+                      </span>
+                    </div>
                     <a
                       href={`https://wa.me/${activeWhatsapp}?text=${encodeURIComponent('Hello Ethixweb technical team, I would like to inquire about an engineering consultation.')}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex-shrink-0"
+                      className="text-base font-bold text-gray-900 hover:text-emerald-600 transition-colors block truncate mt-0.5 font-mono"
                     >
-                      Chat Now →
+                      +{activeWhatsapp}
                     </a>
+                    <div className="mt-1 flex items-center justify-between gap-2">
+                      <p className="text-xs text-gray-500">
+                        Direct consultation with the technical team.
+                      </p>
+                      <a
+                        href={`https://wa.me/${activeWhatsapp}?text=${encodeURIComponent('Hello Ethixweb technical team, I would like to inquire about an engineering consultation.')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-bold text-emerald-600 hover:text-emerald-700 hover:underline flex-shrink-0"
+                      >
+                        Chat Now →
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
+              )}
 
               {/* Direct Email */}
               <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-subtle flex items-start gap-4">
@@ -120,25 +127,23 @@ export default function ContactExperience({
                 </div>
               </div>
 
-              {/* Calendly Booking */}
+              {/* Consultation Booking (Redirected to working contact form) */}
               <div className="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-subtle flex items-start gap-4">
                 <div className="w-10 h-10 rounded-xl bg-red-50 text-brand-red flex items-center justify-center border border-red-100 flex-shrink-0">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div className="min-w-0">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-gray-400 block">
-                    Direct Video Discovery
+                    Direct Project Scoping
                   </span>
                   <a
-                    href={calendlyUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="#contact-form"
                     className="text-base font-bold text-brand-red hover:underline block"
                   >
-                    Schedule 30-Min Discovery Call →
+                    Schedule Discovery Consultation →
                   </a>
                   <p className="text-xs text-gray-500 mt-0.5">
-                    Direct video consultation with the Ethixweb team.
+                    Submit your project specifications directly to our engineering team.
                   </p>
                 </div>
               </div>

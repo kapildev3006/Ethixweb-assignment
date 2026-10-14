@@ -44,11 +44,11 @@ export default async function ContactPage() {
   const hero = contactContent?.hero || {};
   const cd = contactContent?.contactDetails || {};
 
-  const whatsappNumber = contactContent?.whatsappNumber || cd.whatsappNumber || '919876543210';
+  const whatsappNumber = contactContent?.whatsappNumber || cd.whatsappNumber || '';
   const contactEmail = contactContent?.contactEmail || cd.contactEmail || 'info@ethixweb.com';
   const salesPhone = contactContent?.salesPhone || cd.salesPhone || '+1 (888) 555-ETHIX / +91 (80) 4123-ETHX';
   const operatingHours = contactContent?.operatingHours || cd.operatingHours || 'Monday – Friday · 9:00 AM – 7:00 PM IST';
-  const calendlyUrl = contactContent?.calendlyUrl || cd.calendlyUrl || 'https://calendly.com/ethixweb-agency/30min';
+  const calendlyUrl = '#contact-form';
 
   const jsonLd = {
     '@context': 'https://schema.org',

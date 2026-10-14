@@ -35,13 +35,11 @@ export default function ContactCTA() {
                 <ArrowUp className="w-4 h-4" />
               </a>
               <a
-                href="https://calendly.com/ethixweb-agency/30min"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="#contact-form"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-white text-sm sm:text-base font-semibold backdrop-blur-xs transition-colors"
               >
                 <Calendar className="w-4 h-4 text-emerald-300" />
-                <span>Book 30-Min Discovery Call</span>
+                <span>Schedule Consultation</span>
               </a>
             </div>
           </div>

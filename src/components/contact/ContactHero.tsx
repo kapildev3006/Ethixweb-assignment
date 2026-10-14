@@ -65,20 +65,18 @@ export default function ContactHero({
           {/* Action Links */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             <a
-              href="#enquiry-form"
+              href="#contact-form"
               className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 rounded-lg bg-brand-red text-white text-sm sm:text-base font-bold shadow-md hover:bg-brand-red-dark transition-all duration-200 hover:shadow-glow hover:-translate-y-0.5 active:translate-y-0 min-w-[160px]"
             >
               <span>Fill Enquiry Form</span>
               <ArrowDown className="w-4 h-4" />
             </a>
             <a
-              href={calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#contact-form"
               className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-lg border border-gray-300 text-gray-700 text-sm sm:text-base font-semibold bg-white hover:bg-gray-50 hover:border-gray-400 transition-all duration-200 min-w-[160px]"
             >
               <Calendar className="w-4 h-4 text-brand-red" />
-              <span>Book Discovery Call</span>
+              <span>Schedule Consultation</span>
             </a>
           </div>
 

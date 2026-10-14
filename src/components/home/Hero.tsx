@@ -57,7 +57,7 @@ export default function Hero({ data }: HeroProps) {
             {/* Main Headline with responsive text scaling */}
             <h1 className="text-[2.15rem] sm:text-4xl md:text-5xl lg:text-[3.65rem] font-extrabold font-display tracking-tight text-gray-900 leading-[1.14] break-words">
               {headline} <br className="hidden sm:inline" />
-              for{' '}
+              {!headline.trim().toLowerCase().endsWith('for') && 'for '}
               <span className="text-brand-red relative inline-block">
                 {headlineHighlight}
                 <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-brand-red to-brand-red-glow rounded-full" />

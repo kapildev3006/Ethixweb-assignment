@@ -15,7 +15,7 @@ const SiteSettingsSchema = z.object({
   salesPhone: z.string().min(3, 'Phone is required'),
   officeAddress: z.string().min(5, 'Address is required'),
   operatingHours: z.string().min(3, 'Hours are required'),
-  calendlyUrl: z.string().url('Valid Calendly URL required'),
+  calendlyUrl: z.string().min(1).default('#contact-form'),
   primaryBrandColor: z.string().default('#C0272D'),
   socialLinks: z.object({
     linkedin: z.string().url().or(z.literal('')),

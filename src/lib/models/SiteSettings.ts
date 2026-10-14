@@ -74,7 +74,7 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
     },
     whatsappNumber: {
       type: String,
-      default: '919876543210',
+      default: '',
       trim: true,
     },
     officeAddress: {
@@ -87,7 +87,7 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
     },
     calendlyUrl: {
       type: String,
-      default: 'https://calendly.com/ethixweb/discovery-call',
+      default: '#contact-form',
     },
     primaryBrandColor: {
       type: String,
